@@ -6,7 +6,7 @@ As front-end developers,  we always try to minimize the risks of compromising th
 ## XSS
 > cross-site scripting   
 
-1. Refected XSS
+1. Reflected XSS
 > where the malicious script comes from the current HTTP request. 
 
 2.  Stored XSS
