@@ -32,8 +32,8 @@ As front-end developers,  we always try to minimize the risks of compromising th
 > Open Source Web Application Security Scanner. A Web Application Attack and Audit Framework.
 
 
-Others:  Version up 
-> upgrde the app(framework, etc) to latest versions, because bugs have been fixed by numerious engineers.  
+## Other methods
+1. Version up: upgrde the app(framework, etc) to latest versions, because bugs have been fixed by numerious engineers.  
 
 * * * 
 
