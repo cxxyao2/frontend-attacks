@@ -28,8 +28,11 @@ As front-end developers,  we always try to minimize the risks of compromising th
 2. Mozilla HTTP Observatory 
 > a set of tools to analyze your website and inform you if you are utilizing the many available methods to secure it.
 
+3. w3af
+> Open Source Web Application Security Scanner. A Web Application Attack and Audit Framework.
 
-3.  Version up 
+
+Others:  Version up 
 > upgrde the app(framework, etc) to latest versions, because bugs have been fixed by numerious engineers.  
 
 * * * 
