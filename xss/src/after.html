@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+          <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+            <div class="panel panel-info" style="margin-top: 50px">
+              <div class="panel-heading">
+                <h3>售后评价</h3>
+              </div>
+              <div class="panel-body">
+                <form onsubmit="return false">
+                  <div class="form-group">
+                    <label for="comments">商品评论</label>
+                    <input class="form-control" type="text" id="comments" />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      class="btn btn-danger"
+                      type="button"
+                      id="attack"
+                      value="会被攻击"
+                    />
+                    <input
+                      class="btn btn-primary"
+                      type="button"
+                      id="security"
+                      value="我很安全"
+                    />
+                  </div>
+                </form>
+                <ul class="list-group"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+      // DOM XSS attack
+      $(document).ready(function () {
+        $('#attack').click(function () {
+          let commend = $('#comments').val();
+          // no escape, no filter
+          if ($.trim(commend)) {
+            $('.list-group').append(
+              `<li class="list-group-item">${commend}</li>`
+            );
+            $('#comments').val('');
+          }
+        });
+
+        // Html encode
+        function encodeHtml(str) {
+          return str
+            .replace(/"/g, '&quot;')
+            .replace(/'/, '&apos')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+        }
+
+        $('#security').click(function () {
+          let commend = $('#comments').val();
+          alert(commend);
+          // escape entered content
+          // for url link, e.g. image src : encodeURIComponent
+          if ($.trim(commend)) {
+            $('.list-group').append(
+              `<li class="list-group-item">${encodeHtml(commend)}</li>`
+            );
+            $('#comments').val('');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

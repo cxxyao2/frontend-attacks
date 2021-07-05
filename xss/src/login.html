@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>LOG IN</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+          <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+            <div class="panel panel-info" style="margin-top: 50px">
+              <div class="panel-heading">
+                <h3>login</h3>
+              </div>
+              <div class="panel-body">
+                <form onsubmit="return false">
+                  <div class="form-group">
+                    <label for="username">user name:</label>
+                    <input type="text" class="form-control" id="username" />
+                  </div>
+                  <div class="form-group">
+                    <label for="password">password:</label>
+                    <input type="text" class="form-control" id="password" />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="submit"
+                      class="btn btn-primary"
+                      id="login"
+                      value="login"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+      // reflected xss attack
+      $(document).ready(function () {
+        $('#login').click(function () {
+          let username = $('#username').val();
+          let password = $('#password').val();
+          /* skip validation of data */
+          $.post('/api/login', {
+            username,
+            password,
+          }).then((res) => {
+            if (res.code === 0) {
+              // login ok
+              location.href = `/welcome?type=<script>alert('malicious')<\/script>`;
+            } else {
+              // login failed
+              location.href = `/error?type=<script>alert('malicious')<\/script>`;
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
