@@ -1,0 +1,30 @@
+{
+  "name": "frontend-attack",
+  "version": "1.0.0",
+  "description": "xss csrf attacks and preventions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cxxyao2/frontend-attacks.git"
+  },
+  "keywords": [
+    "frontend",
+    "attacks"
+  ],
+  "author": "Jennifer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cxxyao2/frontend-attacks/issues"
+  },
+  "homepage": "https://github.com/cxxyao2/frontend-attacks#readme",
+  "dependencies": {
+    "bootstrap": "3",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
+    "jquery": "^3.5.0",
+    "svg-captcha": "^1.4.0"
+  }
+}
