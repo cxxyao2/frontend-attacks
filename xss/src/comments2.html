@@ -61,7 +61,7 @@
     </div>
     <iframe id="iframe1" src="https://google.com"></iframe>
     <hr />
-    <a href="https://twitter.com" alt="twitter social media" id="link1"
+    <a href="https://twitter.com" alt="twitter social media" id="archor1"
       >twitter</a
     >
     <script
@@ -100,9 +100,10 @@
             encodeURI('http://localhost:3000/unsplash.jpg')
           );
 
-          // , <iframe src="{...} />
+          // <iframe src="{...} />
+          // <a href="..." target="_blank" rel="noopener noreferrer">my homepage</a>
           $('#iframe1').attr('src', encodeURI('https://cxxyao2.github.io'));
-          $('#link1').attr('href', encodeURI('https://cxxyao2.github.io'));
+          $('#archor1').attr('href', encodeURI('https://cxxyao2.github.io'));
 
           $.post('/addComment2', { comment: encodeHtml(comment) }).then(
             (res) => {
