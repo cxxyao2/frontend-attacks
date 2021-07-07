@@ -1,42 +1,46 @@
 # front-end attacks and prevetions
-As front-end developers,  we always try to minimize the risks of compromising the security of  our front-end applications. Doing is the best kind of thinking.  Know the most common front-end attacks and then prevent them.   
 
-* * * 
+As front-end developers, we always try to minimize the risks of compromising the security of our front-end applications. Doing is the best kind of thinking. Know the most common front-end attacks and then prevent them.
+
+---
 
 ## XSS
-> cross-site scripting   
+
+> cross-site scripting
 
 1. Reflected XSS
-> where the malicious script comes from the current HTTP request. 
 
-2.  Stored XSS
-> where the malicious script comes from the website's database.
+   > where the malicious script comes from the current HTTP request.
+   > Test steps: under xss folder,
+   > $node server.js
+   > in browser, enter localhost:3000/login.html
+   > enter wrong user/password(123/123), javascript in url is executed. http://localhost:3000/error?type=&lt;script&gt;alert('...')&lt;script&gt;
+   > enter correct user/password(star/star), javascript in url is escaped.
 
-3.  DOM-based XSS
-> where the vulnerability exists in client-side code rather than server-side code.
+2. Stored XSS
+
+   > where the malicious script comes from the website's database.
+   > in browser, enter localhost:3000/comments.html
+   > in comment field, enter 2222<script>alert(1)</script>. This comment is executed before save.
+   > in browser, enter localhost:3000/comments2.html
+   > in comment field, enter 2222<script>alert(1)</script>. This comment is escaped before save.
+
+3. DOM-based XSS
+   > where the vulnerability exists in client-side code rather than server-side code.
+   > in browser, enter localhost:3000/after.html
+   > in comment field, enter 2222<script>alert(1)</script>. This comment is executed before save.
 
 ## CSRF
-> Cross-site request forgery.  
 
-* * *  
-
-
-## Web Application Security Scanners
-1. Arachni 
-> a Free/Public-Source Web Application Security Scanner aimed towards helping users evaluate the security of web applications.
-
-2. Mozilla HTTP Observatory 
-> a set of tools to analyze your website and inform you if you are utilizing the many available methods to secure it.
-
-3. w3af
-> Open Source Web Application Security Scanner. A Web Application Attack and Audit Framework.
-
-
-## Other methods
-1. Version up: upgrde the app(framework, etc) to latest versions, because bugs have been fixed by numerious engineers.  
-
-* * * 
+> Cross-site request forgery.
+> Test steps:
+> under csrf folder
+> $node server.js
+>$node server2.js
+> in the same browser, enter http://localhost:3001, check the balance of user "star"
+> in the same browser, enter http://localhost:3002/fish.html, steal the money of user "star"
+> The difference between safe1.html,safe2.html,safe3.html;fish1.html/fish2.html/fish3.html is calling different API.
 
 ## Wrap up
-Web security is a task that freont-end devleopers, backend developers and DevOps engineers have to deal with together.
 
+Web security is a task that freont-end devleopers, backend developers and DevOps engineers have to deal with together.
