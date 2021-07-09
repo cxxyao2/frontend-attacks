@@ -12,7 +12,7 @@ const svgCaptcha = require('svg-captcha');
 const helmet = require('helmet');
 
 // comment or uncomment, test sameorigin policy
-// app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
+app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
 
 // set path
 app.use(express.static(path.join(__dirname, 'src')));
