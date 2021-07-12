@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>click Attacking test1</title>
+  </head>
+  <body>
+    <div>
+      <h3>prevent clickAttacking</h3>
+      <div>
+        <iframe id="login1" src="http://localhost:3001/login.html"
+          >the source website does not support iframe</iframe
+        >
+        <div>This iframe is located on other server, not in same origin</div>
+        <div><button onclick="showNameInIframe()">click me</button></div>
+      </div>
+    </div>
+    <script>
+      function showNameInIframe() {
+        const if1 = document.getElementById('login1');
+        console.dir(if1);
+        // const username = if1.getElementById('username');
+        alert('hi');
+      }
+    </script>
+  </body>
+</html>

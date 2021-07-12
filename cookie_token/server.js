@@ -9,6 +9,12 @@ const cookieParser = require('cookie-parser');
 const svgCaptcha = require('svg-captcha');
 var cors = require('cors');
 
+// X-Frame-Options  header
+const helmet = require('helmet');
+
+// comment or uncomment, test sameorigin policy
+// app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
+
 // set path
 app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.static(path.join(__dirname, '../')));
@@ -25,6 +31,7 @@ let userList = [
 ];
 
 let SESSION_ID = 'connect.sid';
+let XSRF_TOKEN = 'XSRF-TOKEN';
 let session = {};
 
 // login
@@ -38,6 +45,8 @@ app.post('/api/login', (req, res) => {
     const cardId = Math.random() + Date.now();
     session[cardId] = { user };
     res.cookie(SESSION_ID, cardId);
+    const token = cardId + ' ' + JSON.stringify(user);
+    res.cookie(XSRF_TOKEN, token);
     res.json({ code: 0 }); // send JSON response
   } else {
     res.json({
@@ -68,6 +77,14 @@ app.get('/api/userinfo', (req, res) => {
 
 app.post('/api/transfer', (req, res) => {
   let info = session[req.cookies[SESSION_ID]];
+  console.log('session is ',JSON.stringify(session));
+   console.log('cookies is ',JSON.stringify(req.cookies));
+   const token = req.header('X-XSRF-TOKEN');
+   console.log('X-XSRF-TOKEN  is', token);
+   if(!token || token !== req.cookies[XSRF_TOKEN]) {
+     return res.json({ code: 1, error: 'user not logged in or valid user .' });
+   }
+
   if (info) {
     // user logged in
     let { payee, amount } = req.body;
